@@ -145,20 +145,31 @@ Authorization: Bearer <your-token>
 
 ---
 
-## Example Usage (curl)
+## Example Usage
 
-```bash
-# 1. Login
-TOKEN=$(curl -s -X POST http://localhost:8080/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"username":"librarian","password":"lib123"}' | jq -r '.token')
+You can test all endpoints using **Postman** (recommended) or curl.
 
-# 2. Add a book
-curl -X POST http://localhost:8080/api/books \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
+### Recommended: Postman
+
+1. POST `http://localhost:8080/api/auth/login` with body:
+   `{"username":"librarian","password":"lib123"}`
+2. Copy the `token` from the response
+3. On every other request, add header: `Authorization: Bearer <token>`
+
+### Using curl (Windows PowerShell)
+
+```powershell
+# Login
+curl -X POST http://localhost:8080/api/auth/login `
+  -H "Content-Type: application/json" `
+  -d '{"username":"librarian","password":"lib123"}'
+
+# Add a book (replace TOKEN with value from login response)
+curl -X POST http://localhost:8080/api/books `
+  -H "Authorization: Bearer TOKEN" `
+  -H "Content-Type: application/json" `
   -d '{"title":"Clean Code","author":"Robert C. Martin","publicationYear":2008,"isbn":"9780132350884"}'
-
+```
 # 3. Add a patron
 curl -X POST http://localhost:8080/api/patrons \
   -H "Authorization: Bearer $TOKEN" \
