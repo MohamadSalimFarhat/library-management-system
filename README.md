@@ -27,7 +27,7 @@ A RESTful API built with **Spring Boot 3** for managing library books, patrons, 
 ### Run the application
 
 ```bash
-git clone 
+git clone https://github.com/MohamadSalimFarhat/library-management-system.git
 cd library-management-system
 mvn spring-boot:run
 ```
